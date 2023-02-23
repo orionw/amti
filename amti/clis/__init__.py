@@ -14,5 +14,7 @@ from amti.clis import (
     save,
     status,
     unblock,
-    preview
+    preview,
+    bonus,
+    list_bonuses,
 )

@@ -38,3 +38,38 @@ def read_workerids_from_file(file: click.Path) -> List:
             worker_ids += row
 
     return worker_ids
+
+
+def read_data_from_csv(file: click.Path, headers: List = None) -> List:
+    """Read WorkerIds from file.
+    
+    Read data from CSV file. Return list of values.
+
+    Parameters
+    ----------
+    file : click.Path
+        Path to CSV file
+
+    Returns
+    -------
+    list
+        List of extracted WorkerId strings.
+        
+    """
+    data = []
+    with open(file, 'r') as f:
+        reader = csv.reader(f)
+
+        # check if first row is header
+        first_row = next(reader)
+        if 'WorkerId' not in first_row:
+            if headers is None:
+                raise Exception("Cannot read a file with no headers")
+            data += first_row
+        else:
+            headers = first_row
+
+        for row in reader:
+            data.append({col_name: value for (col_name, value) in zip(headers, row)})
+
+    return data

@@ -64,16 +64,26 @@ def status_batch(
     logger.info(f'Retrieving status for batch {batch_id}.')
 
     hit_count = 0
+
     hit_status_counts = collections.defaultdict(int)
+    hit_pending_counts = 0
+    hit_available_counts = 0
+    hit_completed_counts = 0
     for hit_id in hit_ids:
         hit = client.get_hit(HITId=hit_id)
         hit_count += 1
         hit_status_counts[hit['HIT']['HITStatus']] += 1
+        hit_pending_counts += hit['HIT']['NumberOfAssignmentsPending']
+        hit_available_counts += hit['HIT']['NumberOfAssignmentsAvailable']
+        hit_completed_counts += hit['HIT']['NumberOfAssignmentsCompleted']
 
     logger.info(f'Retrieving status of batch {batch_id} is complete.')
 
     return {
         'batch_id': batch_id,
         'hit_count': hit_count,
-        'hit_status_counts': hit_status_counts
+        'hit_status_counts': hit_status_counts,
+        'hit_pending_counts': hit_pending_counts,
+        'hit_available_counts': hit_available_counts,
+        'hit_completed_counts': hit_completed_counts,
     }

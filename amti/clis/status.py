@@ -43,6 +43,9 @@ def status_batch(batch_dir, live):
     hit_status_counts = '\n    '.join(
         f'{status}: {count}'
         for status, count in batch_status['hit_status_counts'].items())
+    assignment_status_counts = f'Available: {batch_status["hit_available_counts"]}' + \
+                                    f', Pending: {batch_status["hit_pending_counts"]}' + \
+                                    f', Completed: {batch_status["hit_completed_counts"]}'
 
     click.echo(
       f'\n'
@@ -52,6 +55,8 @@ def status_batch(batch_dir, live):
       f'\n  HIT Count: {hit_count}'
       f'\n  HIT Status Counts:'
       f'\n    {hit_status_counts}'
+      f'\n  Assignment Status Counts:'
+      f'\n    {assignment_status_counts}'
       f'\n')
 
     logger.info('Finished retrieving batch status.')
