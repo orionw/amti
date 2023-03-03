@@ -84,11 +84,11 @@ def save_batch(
                     hit_file, default=utils.serialization.json_helper)
 
             hit_status = hit['HIT']['HITStatus']
-            if hit_status != 'Reviewable':
-                raise ValueError(
-                    f'HIT (ID: {hit_id}) has status "{hit_status}".'
-                    f' In order to save a batch all HITs must have'
-                    f' "Reviewable" status.')
+            # if hit_status != 'Reviewable':
+            #     raise ValueError(
+            #         f'HIT (ID: {hit_id}) has status "{hit_status}".'
+            #         f' In order to save a batch all HITs must have'
+            #         f' "Reviewable" status.')
 
             logger.debug(f'Fetching assignments for HIT (ID: {hit_id}).')
             assignments_paginator = client.get_paginator(

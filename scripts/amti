@@ -55,7 +55,13 @@ subcommands = [
     # disassociate qual
     clis.disassociate.disassociate_qual,
     # preview
-    clis.preview.preview_batch
+    clis.preview.preview_batch,
+    # bonus
+    clis.bonus.bonus_workers,
+    # list bonuses
+    clis.list_bonuses.list_bonuses,
+    # list workers with qual
+    clis.list_workers_with_qual.list_workers_with_qual
 ]
 
 for subcommand in subcommands:

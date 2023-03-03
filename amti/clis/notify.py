@@ -4,6 +4,7 @@ import logging
 
 import click
 import csv
+import json
 
 from amti import actions
 from amti import settings
@@ -58,8 +59,8 @@ def notify_workers(file, ids, subject, message, message_file, live):
     # create message (file values overrides Subject, Message args)
     message = {'Subject': subject, 'MessageText': message}
     if message_file is not None:
-        with open(args.message, 'r') as f:
-            message = json.loads(f.read())
+        with open(message_file, 'r') as f:
+            message["MessageText"] = f.read()
 
     if any(val is None for val in message.values()):
         raise ValueError('Missing Message or Subject value.')

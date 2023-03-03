@@ -17,4 +17,5 @@ from amti.clis import (
     preview,
     bonus,
     list_bonuses,
+    list_workers_with_qual
 )
