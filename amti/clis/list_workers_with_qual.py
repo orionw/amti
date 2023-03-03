@@ -54,6 +54,7 @@ def list_workers_with_qual(qual, name, live):
     response = client.list_workers_with_qualification_type(
         **args
     )
-    breakpoint()
+    for idx in range(response["NumResults"]):
+        logger.info(f"\tWorkerId: {response['Qualifications'][idx]['WorkerId']}, Status: {response['Qualifications'][idx]['Status']}, Value: {response['Qualifications'][idx]['IntegerValue']}")
 
-    logger.info('Finished disassociating quals.')
+    logger.info('Finished listing quals.')
